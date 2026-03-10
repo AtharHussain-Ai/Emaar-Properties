@@ -1,0 +1,954 @@
+@font-face {
+  font-family: "Branch";
+  src: url("./Branch.otf") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+
+:root {
+  --card-1-stroke: #e67339;
+  --card-2-stroke: #a66363;
+  --card-3-stroke: #eb3828;
+  --card-4-stroke: #a6a09d;
+  --card-5-stroke: #99938a;
+  --card-6-stroke: #5f7c98;
+  --card-base-stroke: #e0e0e0;
+  --card-copy: #000;
+}
+
+
+
+/* ================= RESET ================= */
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family:'Inter', sans-serif;
+  
+  
+}
+
+body,html{
+  background:#0f0f0f;
+    color:#efefef;
+  -webkit-font-smoothing:antialiased;
+  text-rendering:optimizeLegibility;
+}
+
+
+/* loader */
+.loader{
+  position:fixed;
+  inset:0;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  background-color: #000000;
+  z-index: 999;
+}
+
+/* logo stack */
+.logo-stack{
+  position:relative;
+  width:75vw;
+  max-width:1100px;
+  min-width:320px;
+}
+
+.base,
+.logo-reveal{
+  width:100%;
+  display:block;
+}
+
+.base{ fill:#2a2a2a; }
+
+.logo-reveal{
+  position:absolute;
+  inset:0;
+  fill:#fff;
+  clip-path: inset(0 100% 0 0);
+}
+
+/* ================================================= */
+/* ================= HERO ========================== */
+/* ================================================= */
+
+.hero{
+  position:relative;
+  height:100vh;
+  width:100%;
+  color:#fff;
+  overflow:hidden;
+
+  background:
+    linear-gradient(to bottom, rgba(0, 0, 0, 0.287), rgba(0, 0, 0, 0)),
+    linear-gradient(to bottom, rgba(0, 0, 0, 0) 60%, rgb(15, 15, 15)),
+    url("bg2.jpeg");
+
+  background-size:cover;
+  background-position:center;
+}
+
+
+
+/* ================================================= */
+/* =============== CONTENT WRAP ==================== */
+/* ================================================= */
+
+.wrap{
+  width:92%;
+  max-width:1600px;
+  height:100%;
+  margin:auto;
+
+  position:relative;
+
+  /* IMPORTANT: above grid */
+  z-index:2;
+}
+
+
+
+/* ================================================= */
+/* ================= HEADER ======================== */
+/* ================================================= */
+
+.header{
+  position: fixed;
+  top: 32px;
+  left: 0;
+  width: 100%;
+
+  /* 3 PERFECT COLUMNS */
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+
+  align-items: center;
+
+  padding: 0 60px;
+  z-index: 9999;
+}
+
+
+/* ================= LOGO ================= */
+.logo{
+  height: 28px;
+  display: block;
+}
+
+
+/* ================= TOPBAR ================= */
+.topbar{
+  justify-self: center;   /* PERFECT CENTER */
+
+  display: flex;
+  gap: 80px;
+
+  font-size: 11px;
+  letter-spacing: 3px;
+  color: rgba(255,255,255,.85);
+
+  white-space: nowrap;
+}
+
+
+
+
+/* ================================================= */
+/* ================= MENU BUTTON =================== */
+/* ================================================= */
+
+
+/* =====================
+   BUTTON (FIX OVERLAP)
+===================== */
+.menu-btn{
+  justify-self: end;
+  position:fixed;
+  top:32px;
+  right:32px;     
+  z-index:1001;
+
+  width:40px;
+  height:14.5px;
+
+  display:flex;
+  flex-direction:column;
+  justify-content:space-between;
+
+  background:none;
+  border:none;
+  cursor:pointer;
+}
+
+.menu-btn span{
+  height:1.5px;
+  width:100%;
+  background:#fff;
+  transition:.35s;
+}
+
+.menu-btn.active span:nth-child(1){
+  transform:rotate(45deg) translate(5px,5px);
+}
+
+.menu-btn.active span:nth-child(2){
+  transform:rotate(-45deg) translate(5px,-5px);
+}
+
+
+
+/* =====================
+   OVERLAY
+===================== */
+/* =====================
+   GLASS OVERLAY (PREMIUM)
+===================== */
+.menu-overlay{
+  position:fixed;
+  inset:0;
+
+  /* transparent dark glass */
+  background:rgba(8, 8, 8, 0.703);
+
+  /* ⭐ REAL BLUR */
+  backdrop-filter: blur(22px) saturate(120%);
+  -webkit-backdrop-filter: blur(22px) saturate(120%);
+
+  /* soft gradient lighting */
+  background-image:
+    radial-gradient(circle at 20% 15%, rgba(255,255,255,0.06), transparent 40%),
+    radial-gradient(circle at 80% 90%, rgba(255,255,255,0.04), transparent 40%);
+
+  border:1px solid rgba(255, 255, 255, 0.06);
+
+  padding:clamp(30px,5vw,90px);
+
+  opacity:0;
+  pointer-events:none;
+
+  display:flex;
+  flex-direction:column;
+  justify-content:space-between;
+  transition:opacity .3s ease;
+
+}
+
+.menu-overlay.active{
+  opacity:1;
+  pointer-events:auto;
+  
+}
+.menu-overlay::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:linear-gradient(
+    120deg,
+    rgba(255,255,255,0.05),
+    transparent 40%
+  );
+  pointer-events:none;
+  
+}
+
+
+.menu-overlay.active{
+  opacity:1;
+  pointer-events:auto;
+}
+
+
+
+/* =====================
+   GRID DESKTOP
+===================== */
+.menu-wrapper{
+  display:grid;
+  grid-template-columns:1fr 1fr 1fr;
+  gap:80px;
+}
+
+
+
+/* =====================
+   TITLES
+===================== */
+.menu-title{
+  font-size:11px;
+  letter-spacing:4px;
+  opacity:.4;
+  margin-bottom:25px;
+}
+
+
+
+/* =====================
+   LINES
+===================== */
+.divider,
+.bottom-line{
+  height:1px;
+  background:#ffffff61;
+  margin-bottom:30px;
+  
+}
+
+
+
+/* =====================
+   NAV LINKS
+===================== */
+.nav-links{
+  list-style:none;
+}
+
+.nav-links li{
+  margin-bottom:26px;
+}
+
+.nav-links a{
+  font-size:clamp(32px,5vw,72px);
+  font-weight:300;
+  letter-spacing:3px;
+  text-decoration:none;
+  color:#fff;
+
+  transition:.3s;
+  display:inline-block;
+}
+
+.nav-links a:hover{
+  transform:translateX(10px);
+  opacity:.6;
+}
+
+
+
+/* =====================
+   ARTICLES
+===================== */
+.articles{
+  display:flex;
+  flex-direction:column;
+  gap:12px;
+}
+
+.articles a{
+  font-size:14px;
+  opacity:.85;
+  color:#fff;
+  text-decoration:none;
+}
+
+.articles span{
+  font-size:11px;
+  opacity:.4;
+}
+
+
+
+/* =====================
+   BOTTOM
+===================== */
+.menu-bottom{
+  font-size:12px;
+  opacity:.4;
+}
+
+
+
+
+
+/* ================================================= */
+/* ================= SIDE TEXT ===================== */
+/* ================================================= */
+
+.side{
+  position:absolute;
+  font-size:13px;
+  letter-spacing:2px;
+  line-height:1.9;
+  max-width:320px;
+}
+
+.left{
+  left:0;
+  top:38%;
+}
+
+.right{
+  right:0;
+  bottom:30%;
+  text-align:right;
+}
+
+
+
+/* ================================================= */
+/* ================= TITLES ======================== */
+/* ================================================= */
+
+.residence{
+  position:absolute;
+  bottom:8%;
+  left:3%;
+
+  font-size:clamp(100px,14vw,280px);
+  font-weight:200;
+  letter-spacing:-7px;
+
+  z-index:0;
+}
+
+.mairen{
+  position:absolute;
+  top:10%;
+  right:3%;
+
+  font-size:clamp(90px,13vw,240px);
+  font-weight:200;
+  letter-spacing:-7px;
+
+  z-index:0;
+}
+
+
+
+/* ================================================= */
+/* ========= PREMIUM FULL-BLEED ARCH GRID ========== */
+/* ================================================= */
+
+.grid{
+  position:absolute;
+  inset:0;
+
+  pointer-events:none;
+
+  /* BELOW EVERYTHING */
+  z-index:0;
+}
+
+.grid span{
+  position:absolute;
+
+  /* luxury faint lines */
+  background:rgba(255,255,255,.07);
+}
+
+
+
+/* ---------- verticals ---------- */
+
+.v-left{
+  left:6%;
+  width:1px;
+  height:100%;
+}
+
+.v-right{
+  right:6%;
+  width:1px;
+  height:100%;
+}
+
+.v-center{
+  left:50%;
+  width:1px;
+  height:100%;
+  transform:translateX(-50%);
+}
+
+
+
+/* ---------- horizontals ---------- */
+
+.h-top{
+  top:90px; /* header baseline */
+  width:100%;
+  height:1px;
+}
+
+.h-mid{
+  bottom:28%;
+  width:100%;
+  height:1px;
+}
+
+.h-bottom{
+  bottom:0;
+  width:100%;
+  height:1px;
+}
+
+/* ================= SECTION ================= */
+.page1{
+  min-height:100vh;
+  padding:clamp(60px,8vw,110px) clamp(20px,6vw,70px);
+  display:flex;
+  flex-direction:column;
+  justify-content:space-between;
+}
+
+
+/* ================= SMALL TITLE ================= */
+.about_us_sec{
+  font-size:12px;
+  letter-spacing:2px;
+  color:#a6a5a5;
+  opacity:1;
+  transform:none;
+  will-change:transform,opacity;
+}
+
+
+/* ================= HERO TEXT ================= */
+.para1{
+  margin-top:75px;
+  width:100%;
+  font-size:clamp(22px, 4.8vw, 52px); /* reduced */
+  line-height:1.1;
+  font-weight:350;
+  letter-spacing:-0.3px;
+  text-transform:uppercase;
+  word-break:break-word;
+  opacity:1;
+  transform:none;
+  color: #d1d1d1;
+  will-change:transform,opacity;
+}
+
+/* muted words */
+.muted{
+  color:#ffffff;
+  will-change:opacity;
+  font-weight: 500;
+
+}
+
+/* mask for line reveal */
+.line-mask{
+  overflow:hidden;
+  display:block;
+}
+
+
+/* ================= BOTTOM ================= */
+.bottom{
+  display:grid;
+  grid-template-columns:repeat(auto-fit, minmax(260px, 1fr));
+  gap:clamp(30px,8vw,160px);
+  margin-top:clamp(60px,10vw,120px);
+}
+
+.bottom p{
+  font-size:14px;
+  line-height:1.85;
+  color:#aaaaaa;
+  max-width:420px;
+  opacity:1;
+  transform:none;
+  will-change:transform,opacity;
+}
+
+.section3{
+width:100%;
+  min-height:100vh; /* FIXED */
+background-color: #303236;
+}
+
+/* HERO */
+
+.section3_img{
+position:relative;
+height:48vh;
+min-height:280px;
+overflow:hidden;
+}
+
+.section3_img video{
+width:100%;
+height:100%;
+object-fit:cover;
+will-change:transform;
+}
+
+.section3_img::after{
+content:"";
+position:absolute;
+inset:0;
+background:linear-gradient(to bottom,transparent 20%, #000);
+}
+
+.section3_line{
+position:absolute;
+bottom:24px;
+left:50%;
+transform:translateX(-50%) scaleX(0);
+transform-origin:center;
+width:72%;
+height:1px;
+background:#9c9c9c;
+z-index:5;
+}
+
+/* GRID */
+
+.section3_content{
+display:grid;
+grid-template-columns:1fr 1fr;
+border-top:1px solid #f5f5f5;
+}
+
+/* LEFT */
+
+.section3_left{
+padding:5.5vw;
+border-right:1px solid #f5f5f5;
+display:flex;
+flex-direction:column;
+
+gap:50px;
+}
+
+.heading_section3{
+font-size:clamp(34px,4.2vw,58px);
+line-height:1.12;
+font-weight:200;
+max-width:620px;
+}
+
+/* split fix */
+
+.line{
+overflow:hidden;
+}
+
+/* TAGS */
+
+.section3_buttons{
+display:flex;
+gap:12px;
+flex-wrap:wrap;
+}
+
+.section3_buttons button{
+padding:12px 18px;
+border:1px solid #f5f5f5;
+border-radius:50px;
+background: #292929;
+font-size:14px;
+text-transform: uppercase;
+cursor:pointer;
+color: #f5f5f5;
+}
+.section3_buttons button:hover{
+  background:#000;   /* black background */
+}
+/* RIGHT */
+
+.section3_right{
+padding:5.5vw;
+display:flex;
+flex-direction:column;
+}
+
+.section3_right p{
+font-size:clamp(16px,1.3vw,20px);
+line-height:1.75;
+max-width:540px;
+}
+
+
+
+/* MAIN SECTION */
+
+.proj_srt{
+width:100%;
+height:100vh;
+position:relative;
+overflow:hidden;
+color:#f5f5f5;
+}
+
+/* VIDEO */
+
+.proj_video{
+position:absolute;
+top:50%;
+left:50%;
+width:115%;
+height:115%;
+transform:translate(-50%,-50%);
+object-fit:cover;
+z-index:1;
+filter:contrast(1.05) saturate(1.05);
+}
+
+/* CINEMATIC DARK */
+
+.proj_dark{
+position:absolute;
+bottom:0;
+left:0;
+width:100%;
+height:55%;
+
+background:linear-gradient(
+to top,
+rgba(0,0,0,0.98) 0%,
+rgba(0,0,0,0.7) 40%,
+rgba(0,0,0,0.2) 75%,
+rgba(0, 0, 0, 0) 100%
+);
+
+z-index:1;
+}
+
+
+/* PARAGRAPH */
+
+.proj_para{
+
+position:absolute;
+
+bottom:8vh;
+right:4vw;
+
+max-width:clamp(240px,22vw,420px);
+
+font-size:clamp(14px,1.1vw,18px);
+
+line-height:1.7;
+
+opacity:.85;
+
+z-index:1;
+
+text-shadow:0 2px 12px rgba(0,0,0,0.35);
+
+}
+
+/* CINEMATIC EDGE SHADOW */
+
+.proj_srt::after{
+
+content:"";
+
+position:absolute;
+
+inset:0;
+
+background:radial-gradient(
+circle at center,
+rgba(0,0,0,0) 55%,
+rgba(0,0,0,0.65) 100%
+);
+
+pointer-events:none;
+
+z-index:1;
+
+}
+
+/* IMAGE FIX */
+
+.card-container img,
+svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+/* HEADER */
+
+.projects {
+  width: 100%;
+  padding: 15rem 2rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+.projects h1 {
+  font-size: clamp(2rem, 5vw, 7rem);
+  font-weight: 500;
+  line-height: 1.25;
+  letter-spacing: -0.05rem;
+}
+
+
+
+/* GRID LAYOUT */
+
+.row {
+  width: 100%;
+  padding: 0 1rem;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem;
+}
+
+/* CARD */
+
+.card-container {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  border-radius: 1rem;
+  overflow: hidden;
+  
+}
+
+/* IMAGE PERFECT FIT */
+
+.card-container img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* SVG STROKE */
+
+.card-container .svg-stroke {
+  position: absolute;
+  inset: 0;
+  transform: scale(1.5);
+}
+
+/* STROKE COLORS */
+
+#card-1 .svg-stroke-1 svg path {
+  stroke: var(--card-1-stroke);
+}
+
+#card-2 .svg-stroke-1 svg path {
+  stroke: var(--card-2-stroke);
+}
+
+#card-3 .svg-stroke-1 svg path {
+  stroke: var(--card-3-stroke);
+}
+
+#card-4 .svg-stroke-1 svg path {
+  stroke: var(--card-4-stroke);
+}
+
+#card-5 .svg-stroke-1 svg path {
+  stroke: var(--card-5-stroke);
+}
+
+#card-6 .svg-stroke-1 svg path {
+  stroke: var(--card-6-stroke);
+}
+
+.card-container .svg-stroke-2 svg path {
+  stroke: var(--card-base-stroke);
+}
+
+/* TITLE */
+
+.card-title {
+  position: absolute;
+  bottom: 2rem;
+  left: 2rem;
+  color: var(--card-copy);
+}
+
+.card-title .word {
+  will-change: transform;
+}
+
+.card-title h3 {
+  font-size: clamp(1.25rem, 2.5vw, 3rem);
+  font-weight: 450;
+  line-height: 1.25;
+  letter-spacing: -0.025rem;
+}
+
+/* MOBILE */
+
+
+
+/* ================================================= */
+/* ================= RESPONSIVE ==================== */
+/* ================================================= */
+
+@media(max-width:900px){
+
+  .topbar{
+    display:none;
+  }
+
+  .logo{
+    height:22px;
+  }
+
+  .side{
+    font-size:11px;
+    max-width:180px;
+  }
+
+  .residence{
+    font-size:18vw;
+  }
+
+  .mairen{
+    font-size:16vw;
+  }
+    /* stack everything */
+  .menu-wrapper{
+    display:flex;
+    flex-direction:column;
+    gap:60px;
+  }
+
+  /* hide articles completely */
+  .menu-right{
+    display:none;
+  }
+
+  /* center text for mobile premium look */
+  .menu-left,
+  .menu-center{
+    text-align:left;
+  }
+
+  .menu-overlay{
+    justify-content:flex-start;
+    gap:60px;
+  }
+
+  .menu-bottom{
+    margin-top:60px;
+  }
+    .para1{
+    line-height:1.25;
+    letter-spacing:0;
+  }
+
+  .bottom p{
+    font-size:13px;
+  }
+
+  .section3_content{
+grid-template-columns: 1fr;
+}
+.section3_left{
+border-right:none;
+border-bottom:1px solid #cfcfcf;
+}
+  .row {
+    grid-template-columns: 1fr;
+  }
+
+  .card-title {
+    bottom: 1rem;
+    left: 1rem;
+  }
+}
