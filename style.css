@@ -873,6 +873,73 @@ svg {
 
 /* MOBILE */
 
+#spongebobUniverse{
+background:#000000;
+color:white;
+padding:100px 120px 40px 120px;
+overflow:hidden;
+}
+
+.patrickContainer{
+width:100%;
+}
+
+.gokuRow{
+display:grid;
+grid-template-columns:1fr 1fr;
+padding:40px 0;
+}
+
+.thorHeading{
+font-size:72px;
+line-height:1.1;
+font-weight:100;
+}
+
+.luffyPara{
+font-size:18px;
+max-width:420px;
+line-height:1.6;
+opacity:.9;
+}
+
+.shinchanTitle{
+font-size:16px;
+opacity:.8;
+}
+
+.batmanLinks{
+list-style:none;
+}
+
+.batmanLinks li{
+font-size:18px;
+margin-bottom:6px;
+cursor:pointer;
+}
+
+.pikachuDivider{
+width:100%;
+height:1px;
+background:rgba(255,255,255,0.3);
+}
+
+.doraemonLogo{
+font-size:220px;
+margin-top:80px;
+font-weight:200;
+line-height:1;
+letter-spacing:-5px;
+}
+
+.shinobiBottom{
+display:flex;
+justify-content:space-between;
+margin-top:30px;
+font-size:14px;
+opacity:.9;
+}
+
 
 
 /* ================================================= */
@@ -880,6 +947,23 @@ svg {
 /* ================================================= */
 
 @media(max-width:900px){
+  #spongebobUniverse{
+padding:60px 30px;
+}
+
+.gokuRow{
+grid-template-columns:1fr;
+gap:20px;
+}
+
+.thorHeading{
+font-size:42px;
+}
+
+.doraemonLogo{
+font-size:90px;
+}
+
 
   .topbar{
     display:none;
@@ -951,4 +1035,5 @@ border-bottom:1px solid #cfcfcf;
     bottom: 1rem;
     left: 1rem;
   }
+  
 }

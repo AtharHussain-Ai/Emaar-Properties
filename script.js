@@ -638,3 +638,25 @@ function projectCardAnimation() {
 }
 
 projectCardAnimation();
+
+
+
+
+
+function footer(){
+  gsap.from(".gokuRow",{
+opacity:0,
+y:60,
+stagger:0.2,
+duration:1
+})
+
+gsap.from(".doraemonLogo",{
+y:120,
+opacity:0,
+duration:1.2,
+delay:0.5
+})
+}
+
+footer()
